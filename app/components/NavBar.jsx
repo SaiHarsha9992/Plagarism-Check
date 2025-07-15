@@ -71,7 +71,7 @@ export default function Navbar() {
                     </button>
 
                     {open && (
-                        <div className="absolute right-0 mt-2 w-64 bg-white text-black rounded shadow-md z-50">
+                        <div className="absolute right-0 mt-2 w-64 bg-gradient-to-br from-gray-900 to-blue-600 text-black rounded shadow-md z-50">
                             <div className="p-4 border-b text-center">
                                 <Image
                                     src={user.photoURL || '/default-profile.png'}
