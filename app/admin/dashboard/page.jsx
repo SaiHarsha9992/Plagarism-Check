@@ -51,7 +51,7 @@ return (
     <>
     <Toaster position="top-right" reverseOrder={false} />
     <Navbar/>
-    <div className="p-6 max-w-5xl mx-auto">
+    <div className="p-6 max-w-7xl mx-auto bg-gradient-to-br from-gray-900 to-blue-900">
         <h2 className="text-2xl font-bold mb-4">🔐 Admin Dashboard</h2>
 
         <div className="mb-6 flex flex-col md:flex-row gap-3">

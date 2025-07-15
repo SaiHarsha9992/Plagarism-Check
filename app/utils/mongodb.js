@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+
 const connectionUrl = process.env.MONGO_URI;
 
 if (!connectionUrl) {
@@ -12,11 +13,13 @@ const connectToDatabase = async () => {
 
   try {
     await mongoose.connect(connectionUrl, {
-      dbName: "submissions",
+      dbName: "submissions", // or "Users" if you're using that
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
     });
-    console.log("Connected to MongoDB");
+    console.log("✅ Connected to MongoDB");
   } catch (error) {
-    console.error("MongoDB connection error:", error);
+    console.error("❌ MongoDB connection error:", error);
     throw error;
   }
 };

@@ -134,23 +134,25 @@ export default function SubmitPage() {
     }),
   });
 
+  // Clear codeId from localStorage after submission
+  localStorage.removeItem('codeId');
+  setMeta(null); // Force re-ask for codeId if user returns
+
   import('react-hot-toast').then(({ toast }) => toast.success('Submission successful'));
   router.push(`/results?codeId=${meta.codeId}`);
 };
+
 
   const toggleTheme = () => setTheme(theme === 'dark' ? 'light' : 'dark');
 
   if (!meta) {
     return (
+      <>
+      
+        <Navbar />
       <div className={`flex items-center justify-center min-h-screen bg-gradient-to-br ${theme === 'dark' ? 'from-gray-900 to-blue-900' : 'from-gray-100 to-blue-100'}`}>
         <div className={`p-8 max-w-md w-full border rounded-lg ${theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-white'} shadow-lg`}>
           <div className="flex justify-end mb-2">
-            <button
-              className="px-3 py-1 rounded bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-xs"
-              onClick={toggleTheme}
-            >
-              Switch to {theme === 'dark' ? 'Light' : 'Dark'} Mode
-            </button>
           </div>
           <h2 className="text-2xl font-bold mb-6 text-center text-blue-700 dark:text-blue-300">Enter Your Submission Details</h2>
           <input
@@ -180,6 +182,7 @@ export default function SubmitPage() {
           </button>
         </div>
       </div>
+      </>
     );
   }
 
