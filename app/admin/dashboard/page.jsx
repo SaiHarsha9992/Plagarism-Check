@@ -12,6 +12,7 @@ export default function AdminDashboard() {
   const [codeList, setCodeList] = useState([]);
   const [selectedCode, setSelectedCode] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [plagiarisedList, setPlagiarisedList] = useState([]);
 
   useEffect(() => {
     onAuthStateChanged(auth, (u) => {
@@ -46,6 +47,50 @@ export default function AdminDashboard() {
     }
     setLoading(false);
   };
+  const checkPlagiarism = async () => {
+  if (!codeId) {
+    toast.error('Enter a codeId to check for plagiarism');
+    return;
+  }
+
+  setLoading(true);
+  try {
+    const res = await fetch('https://plagrisum-check-backend-1.onrender.com/submissions/check-all');
+    const allResults = await res.json();
+
+    const matching = allResults.filter(entry => entry.codeId === codeId);
+
+    if (matching.length === 0) {
+      toast.success('No plagiarism detected for this Code ID');
+    } else {
+      toast.success(`Plagiarism detected for ${matching.length} user(s)`);
+    }
+
+    setPlagiarisedList(matching); // 🔥 Save the results
+
+    // Send emails to each user
+    matching.forEach(async (entry) => {
+  const count = entry.plagiarisedWith.length - 1; // exclude the person themself
+  await fetch('/api/send-email', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      to: entry.email,
+      subject: `⚠️ Plagiarism Detected - Code ID: ${entry.codeId}`,
+      message: `Hi ${entry.name},\n\nWe have reviewed the code submissions under Code ID "${entry.codeId}" and identified your submission as potentially plagiarised.\n\n🚨 Your code appears to closely match with ${count} other submission(s), indicating possible code duplication or unauthorized sharing.\n\nIf you believe this is a mistake or have a valid explanation, please reach out to the administrator immediately with supporting details.\n\nIt’s important that all participants uphold academic and ethical integrity.\n\nThank you for your cooperation.\n\n- Plagiarism Check Team`
+    }),
+  });
+});
+
+
+  } catch (err) {
+    toast.error('Failed to check plagiarism');
+    console.error(err);
+  }
+  setLoading(false);
+};
+
+
 
 return (
     <>
@@ -70,11 +115,14 @@ return (
                 {loading ? 'Fetching...' : 'Get Submissions'}
             </button>
             <button
-                className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded"
-                onClick={() => toast('🧠 Plagiarism check feature coming soon')}
-            >
-                🧠 Check Plagiarism
+                className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded"
+                onClick={checkPlagiarism}
+                disabled={loading}
+                >
+                {loading ? 'Checking...' : '🧠 Check Plagiarism'}
             </button>
+
+
         </div>
 
         {/* List of matching submissions */}
@@ -118,6 +166,27 @@ return (
                 </div>
             </div>
         )}
+        {plagiarisedList.length > 0 && (
+  <div className="mt-10 bg-white dark:bg-gray-900 p-6 rounded-lg shadow-md">
+    <h3 className="text-xl font-bold mb-4 text-red-500">🚨 Plagiarism Detected</h3>
+    {plagiarisedList.map((entry, i) => (
+      <div key={i} className="mb-6 border border-red-400 p-4 rounded bg-red-50 dark:bg-red-900">
+        <p><b>Name:</b> {entry.name}</p>
+        <p><b>Email:</b> {entry.email}</p>
+        <p><b>Code ID:</b> {entry.codeId}</p>
+        <p className="mt-2 font-semibold">⚠️ Plagiarised With:</p>
+        <ul className="list-disc list-inside ml-4">
+          {entry.plagiarisedWith.map((p, idx) => (
+            <li key={idx}>
+              {p.name} ({p.email})
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
+)}
+
     </div>
     </>
 );

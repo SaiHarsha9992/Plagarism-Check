@@ -13,7 +13,7 @@ const connectToDatabase = async () => {
 
   try {
     await mongoose.connect(connectionUrl, {
-      dbName: "submissions", // or "Users" if you're using that
+      dbName: "submissions",
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
