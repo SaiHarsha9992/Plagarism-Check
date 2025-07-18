@@ -1,4 +1,62 @@
-'use client';
+"use client";
+// ParallaxBackground copied from landing page
+const symbols = [
+  '{', '}', '()', '<>', 'JS', 'Py', 'C++', 'Java', 'λ', '∑', '∫', 'ƒ', '→', '⇌', 'Σ', 'π', '∂', '≡', '≠', '&&', '||', '::', '=>', '/*', '*/', 'def', 'class', 'public', 'private', 'import', 'export', 'return', 'if', 'else', 'for', 'while', 'try', 'catch', 'finally', 'new', 'const', 'let', 'var', 'true', 'false', 'null', 'undefined', 'NaN', 'async', 'await', 'static', 'void', 'main', 'print', 'cout', 'System.out.println', 'console.log', 'list', 'dict', 'map', 'set', 'tree', 'graph', 'node', 'edge', 'BFS', 'DFS', 'O(n)', 'O(1)', 'O(log n)', 'O(n^2)'
+];
+
+function ParallaxBackground() {
+  return (
+    <div style={{
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      width: '100vw',
+      height: '100vh',
+      zIndex: -1,
+      overflow: 'hidden',
+      background: 'radial-gradient(ellipse at 50% 20%, #222 60%, #000 100%)',
+    }}>
+      {[...Array(120)].map((_, i) => (
+        <div key={i} style={{
+          position: 'absolute',
+          top: `${Math.random() * 100}%`,
+          left: `${Math.random() * 100}%`,
+          width: `${Math.random() * 2 + 1}px`,
+          height: `${Math.random() * 2 + 1}px`,
+          borderRadius: '50%',
+          background: 'white',
+          opacity: Math.random() * 0.7 + 0.3,
+          filter: 'blur(0.5px)',
+          animation: `starMove ${10 + Math.random() * 20}s linear infinite`,
+        }} />
+      ))}
+      {symbols.slice(0, 40).map((sym, i) => (
+        <span key={sym + i} style={{
+          position: 'absolute',
+          top: `${Math.random() * 100}%`,
+          left: `${Math.random() * 100}%`,
+          fontSize: `${Math.random() * 2 + 1.2}rem`,
+          color: ['#fff', '#bbb', '#888'][i % 3],
+          opacity: 0.15 + Math.random() * 0.25,
+          fontWeight: 700,
+          pointerEvents: 'none',
+          animation: `floatSymbol ${12 + Math.random() * 18}s ease-in-out infinite`,
+        }}>{sym}</span>
+      ))}
+      <style>{`
+        @keyframes starMove {
+          0% { transform: translateY(0); }
+          100% { transform: translateY(20px); }
+        }
+        @keyframes floatSymbol {
+          0% { transform: translateY(0) scale(1); }
+          50% { transform: translateY(-30px) scale(1.1); }
+          100% { transform: translateY(0) scale(1); }
+        }
+      `}</style>
+    </div>
+  );
+}
 import { useEffect, useState } from 'react';
 import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
@@ -46,15 +104,16 @@ export default function LoginPage() {
 
   return (
     <>
+      <ParallaxBackground />
       <Navbar />
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-white to-blue-100 dark:from-gray-900 dark:to-gray-800">
-        <div className="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-2xl w-full max-w-md">
-          <h2 className="text-2xl font-bold mb-6 text-center text-blue-900 dark:text-blue-300">
-            Login
+      <div className="min-h-screen flex items-center justify-center bg-transparent">
+        <div className="bg-black text-white p-8 rounded-xl shadow-2xl w-full max-w-md border border-gray-800" style={{ backdropFilter: 'blur(2px)' }}>
+          <h2 className="text-3xl font-extrabold mb-6 text-center" style={{ letterSpacing: '-1px', textShadow: '0 2px 12px #000' }}>
+            Login to <span style={{ color: 'grey', fontWeight: 900 }}>CloneCatcher</span>
           </h2>
           <div className="mb-4">
             <input
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 dark:bg-gray-700 dark:text-white dark:border-gray-600"
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400 bg-black text-white border-gray-700 placeholder-gray-400"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email"
@@ -64,7 +123,7 @@ export default function LoginPage() {
           </div>
           <div className="mb-6">
             <input
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 dark:bg-gray-700 dark:text-white dark:border-gray-600"
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400 bg-black text-white border-gray-700 placeholder-gray-400"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -85,7 +144,8 @@ export default function LoginPage() {
             <hr className="flex-grow border-t dark:border-gray-600" />
           </div>
           <button
-            className="w-full flex items-center justify-center gap-2 bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition disabled:opacity-50"
+            className="w-full flex items-center justify-center gap-2 bg-black text-white py-2 rounded-lg font-semibold hover:bg-gray-100 hover:text-black transition disabled:opacity-50"
+
             onClick={loginWithGoogle}
             disabled={loading}
           >

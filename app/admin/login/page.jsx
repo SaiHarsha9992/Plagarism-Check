@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 import Navbar from '@/app/components/NavBar';
 
 
-const ALLOWED_ADMINS = ['gaduharsha72@gmail.com', 'anotheradmin@example.com'];
+const ALLOWED_ADMINS = ['www.umesh1651@gmail.com', ''];
 
 export default function AdminLogin() {
   const [email, setEmail] = useState('');
@@ -109,7 +109,7 @@ export default function AdminLogin() {
           <button
             onClick={loginWithGoogle}
             disabled={loading}
-            className="w-full flex items-center justify-center gap-2 bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition disabled:opacity-50"
+            className="w-full flex items-center justify-center gap-2 bg-white-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition disabled:opacity-50"
           >
             <svg className="w-5 h-5" viewBox="0 0 48 48">
               <g>

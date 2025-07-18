@@ -150,32 +150,32 @@ export default function SubmitPage() {
       <>
       
         <Navbar />
-      <div className={`flex items-center justify-center min-h-screen bg-gradient-to-br ${theme === 'dark' ? 'from-gray-900 to-blue-900' : 'from-gray-100 to-blue-100'}`}>
-        <div className={`p-8 max-w-md w-full border rounded-lg ${theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-white'} shadow-lg`}>
+      <div className={`flex items-center justify-center min-h-screen ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
+        <div className={`p-8 max-w-md w-full border rounded-lg ${theme === 'dark' ? 'bg-black text-white' : 'bg-white text-black'} shadow-lg border-gray-800`}>
           <div className="flex justify-end mb-2">
           </div>
-          <h2 className="text-2xl font-bold mb-6 text-center text-blue-700 dark:text-blue-300">Enter Your Submission Details</h2>
+          <h2 className="text-2xl font-bold mb-6 text-center text-black dark:text-white">Enter Your Submission Details</h2>
           <input
             placeholder="Code ID"
             value={metaForm.codeId}
             onChange={(e) => setMetaForm({ ...metaForm, codeId: e.target.value })}
-            className="mb-4 w-full p-3 border rounded dark:bg-gray-900 dark:text-white"
+            className="mb-4 w-full p-3 border rounded bg-white text-black dark:bg-black dark:text-white border-gray-800"
           />
           <input
             placeholder="Name"
             value={metaForm.name}
             onChange={(e) => setMetaForm({ ...metaForm, name: e.target.value })}
-            className="mb-4 w-full p-3 border rounded dark:bg-gray-900 dark:text-white"
+            className="mb-4 w-full p-3 border rounded bg-white text-black dark:bg-black dark:text-white border-gray-800"
           />
           <input
             placeholder="Email"
             type="email"
             value={metaForm.email}
             onChange={(e) => setMetaForm({ ...metaForm, email: e.target.value })}
-            className="mb-6 w-full p-3 border rounded dark:bg-gray-900 dark:text-white"
+            className="mb-6 w-full p-3 border rounded bg-white text-black dark:bg-black dark:text-white border-gray-800"
           />
           <button
-            className="bg-blue-600 hover:bg-blue-700 transition text-white px-4 py-2 rounded w-full font-semibold"
+            className="bg-black text-white hover:bg-gray-800 transition px-4 py-2 rounded w-full font-semibold border border-gray-800"
             onClick={handleMetaSubmit}
           >
             Start Coding
@@ -189,9 +189,9 @@ export default function SubmitPage() {
   return (
     <div className={theme === 'dark' ? 'dark' : ''}>
         <Navbar />
-        <div className={`min-h-screen bg-gradient-to-br ${theme === 'dark' ? 'from-gray-900 to-blue-900' : 'from-blue-50 to-white'} py-8`}>
+        <div className={`min-h-screen ${theme === 'dark' ? 'bg-black' : 'bg-white'} py-8`}>
             <div className={`max-w-6xl mx-auto rounded-xl shadow-lg p-8 grid md:grid-cols-2 gap-10
-                ${theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-white text-gray-900 border border-blue-100'}`}>
+                ${theme === 'dark' ? 'bg-black text-white border border-gray-800' : 'bg-white text-black border border-gray-800'}`}>
                 {/* Left: Problem */}
                 <div className="space-y-6">
                     <h2 className={`text-2xl font-bold ${theme === 'dark' ? 'text-blue-300' : 'text-blue-700'}`}>{PROBLEM.title}</h2>

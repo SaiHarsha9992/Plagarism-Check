@@ -13,7 +13,7 @@ export async function POST(req) {
   });
 
   await transporter.sendMail({
-    from: 'plagarism-check@gmail.com',
+    from: 'clonecatcher@gmail.com',
     to,
     subject,
     text: message,
