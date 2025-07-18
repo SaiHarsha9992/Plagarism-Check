@@ -8,8 +8,8 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata = {
-  title: "Plagarism Check App",
-  description: "Its is a app for checking plagarism of the code.",
+  title: "CloneCatcher",
+  description: "CloneCatcher is a professional platform for detecting code plagiarism with accuracy and style.",
 };
 
 export default function RootLayout({ children }) {

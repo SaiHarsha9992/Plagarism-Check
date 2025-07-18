@@ -45,6 +45,7 @@ function ResultsContent() {
     <Navbar/>
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-white to-blue-100 dark:from-gray-900 dark:to-gray-800">
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 text-center max-w-md w-full">
+        <h1 className="text-3xl font-extrabold mb-4 text-white bg-black p-2 rounded">CloneCatcher Results</h1>
         <h2 className="text-3xl font-bold mb-4 text-blue-700 dark:text-blue-300">
           ✅ Submission Successful
         </h2>

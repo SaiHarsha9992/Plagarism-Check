@@ -39,18 +39,19 @@ export default function Navbar() {
     const isAdminRoute = pathname?.startsWith('/admin');
 
     return (
-        <header className="w-full px-6 py-3 flex justify-between items-center bg-gradient-to-br from-gray-900 to-blue-900 text-white shadow-md">
+        <header className="w-full px-6 py-3 flex justify-between items-center bg-black text-white shadow-md border-b border-gray-800">
             <h1
-                className="text-2xl font-bold cursor-pointer"
+                className="text-2xl font-extrabold tracking-tight cursor-pointer"
+                style={{ fontFamily: 'Inter, Roboto, Montserrat, Arial, sans-serif', letterSpacing: '-1px' }}
                 onClick={() => router.push('/')}
             >
-                MyApp
+                CloneCatcher
             </h1>
 
             {!user ? (
                 <button
                     onClick={() => router.push('/login')}
-                    className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded text-white font-medium"
+                    className="bg-white text-black px-4 py-2 rounded font-semibold border border-gray-700 hover:bg-gray-100 transition"
                 >
                     Login
                 </button>
@@ -71,8 +72,8 @@ export default function Navbar() {
                     </button>
 
                     {open && (
-                        <div className="absolute right-0 mt-2 w-64 bg-gradient-to-br from-gray-900 to-blue-600 text-black rounded shadow-md z-50">
-                            <div className="p-4 border-b text-center">
+                        <div className="absolute right-0 mt-2 w-64 bg-gray-900 text-white rounded shadow-md z-50 border border-gray-800">
+                            <div className="p-4 border-b border-gray-800 text-center">
                                 <Image
                                     src={user.photoURL || '/default-profile.png'}
                                     alt="User Avatar"
@@ -84,19 +85,19 @@ export default function Navbar() {
                                 <p className="font-semibold">
                                     {user.displayName || 'Anonymous User'}
                                 </p>
-                                <p className="text-sm text-gray-600">{user.email}</p>
+                                <p className="text-sm text-gray-400">{user.email}</p>
                             </div>
                             <div className="p-2">
                                 {isAdminRoute && (
                                     <button
-                                        className="w-full px-4 py-2 mb-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                                    className="w-full px-4 py-2 mb-2 bg-white text-black rounded border border-gray-700 hover:bg-gray-100"
                                         onClick={() => router.push('/admin/dashboard')}
                                     >
                                         Dashboard
                                     </button>
                                 )}
                                 <button
-                                    className="w-full px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+                                    className="w-full px-4 py-2 bg-gray-800 text-white rounded border border-gray-700 hover:bg-black"
                                     onClick={handleSignOut}
                                 >
                                     Logout
