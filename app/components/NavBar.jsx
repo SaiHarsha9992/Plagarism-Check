@@ -44,7 +44,11 @@ export default function Navbar() {
                 className="text-2xl font-bold cursor-pointer"
                 onClick={() => router.push('/')}
             >
+<<<<<<< HEAD
                 CloneCatcher
+=======
+                MyApp
+>>>>>>> sudheer
             </h1>
 
             {!user ? (

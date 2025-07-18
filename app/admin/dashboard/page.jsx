@@ -66,10 +66,18 @@ export default function AdminDashboard() {
       toast.success(`Plagiarism detected for ${matching.length} user(s)`);
     }
 
+<<<<<<< HEAD
     setPlagiarisedList(matching); 
 
     matching.forEach(async (entry) => {
   const count = entry.plagiarisedWith.length - 1;
+=======
+    setPlagiarisedList(matching); // 🔥 Save the results
+
+    // Send emails to each user
+    matching.forEach(async (entry) => {
+  const count = entry.plagiarisedWith.length - 1; // exclude the person themself
+>>>>>>> sudheer
   await fetch('/api/send-email', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
