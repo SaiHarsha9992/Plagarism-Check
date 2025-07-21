@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: plagiarism-checker
+    env: docker   # ✅ correct keyword is 'env', not 'environment'
+    repo: https://github.com/Sudheer-18/Springboot-Plagrisum-Check-Backend
+    region: asia
+    branch: main
+    dockerfilePath: Dockerfile
+    plan: free
+    envVars:
+      - key: PORT
+        value: 8080

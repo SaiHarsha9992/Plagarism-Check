@@ -6,6 +6,7 @@ const CodeSubmissionSchema = new mongoose.Schema({
   email: String,
   code: String,
   language: String,
+  plagiarism: Number,
   timestamp: Date,
 });
 

@@ -2,22 +2,21 @@ import mongoose from 'mongoose';
 import connectToDatabase from '@/app/utils/mongodb';
 
 export async function POST(req) {
-  const { codeId, name, email, code, language, timestamp } = await req.json();
+  const { codeId, name, email, submissions, timestamp, forcedFail } = await req.json();
 
-  await connectToDatabase(); // Connect using mongoose
+  await connectToDatabase();
 
-  // Define schema & model (dynamic schema allows flexibility)
-  const submissionSchema = new mongoose.Schema({}, { strict: false });
-  const Submission = mongoose.models.Submission || mongoose.model('Submission', submissionSchema, 'submissions');
+  const schema = new mongoose.Schema({}, { strict: false });
+  const Submission = mongoose.models.Submission || mongoose.model('Submission', schema, 'submissions');
 
   try {
     await Submission.create({
       codeId,
       name,
       email,
-      code,
-      language,
+      submissions,
       timestamp,
+      forcedFail,
     });
 
     return new Response(JSON.stringify({ success: true }), { status: 200 });
