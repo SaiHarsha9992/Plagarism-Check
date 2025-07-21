@@ -1,4 +1,34 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Plagarism Check
+
+### What is the features?
+
+* 🔐 **Firebase Authentication** – Secure login using Google accounts.
+* 📝 **Code Submission Interface** – Built-in Monaco Editor for writing and submitting code in C++, Java, or Python.
+* 🚀 **Online Code Execution** – Real-time code compilation and test case execution using an API-based compiler.
+* 🧠 **Plagiarism Detection** – Backend engine compares submitted code for structural and logical similarities.
+* 📊 **Admin Dashboard** – View all submissions, search by Code ID, and run plagiarism checks.
+* 🌗 **Light/Dark Mode** – User-friendly UI with theme toggle.
+* ⏳ **Auto Save & Countdown** – Local draft saving and optional test timer for exam environments.
+* 📧 **Email Notifications** – After submission, results are sent to the user’s registered email.\\
+
+### Tech Stack:
+
+* **Frontend**: Next.js, Tailwind CSS, Monaco Editor, Firebase Auth
+* **Backend**: FastAPI / Express.js (plagiarism detection logic), MongoDB, ChromaDB (optional vector store)
+* **Compiler API**: RapidAPI-based judge or custom execution service
+* **Authentication**: Firebase
+* **Deployment**: Render / Vercel / Dockerized Setup
+
+### Modules:
+
+* `/submit` – Authenticated page for test takers to write and submit code
+* `/results` – Displays confirmation and result notification
+* `/admin/dashboard` – Admin-only route for monitoring and analyzing submissions
+* `/api` – Contains routes for running code, storing results, and fetching submission data
+
+### Use Case:
+
+Ideal for **coding tests, online technical assessments, and university programming assignments**, where code originality matters. It automates code submission handling and provides tools for detecting potential cheating or code reuse.
 
 ## Getting Started
 
@@ -17,20 +47,3 @@ bun dev
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
